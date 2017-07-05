@@ -23,7 +23,7 @@
                         var dropDownTopInTop = button.offset().top -  $window.pageYOffset;
 
                         if ($(window).height() < (dropDownTopInBottom + dropdown.height())) {
-                            dropdown.css('top', (dropDownTopInTop - dropdown.height()) + "px");
+                            dropdown.css('top', (dropDownTopInTop - dropdown.height() - button.outerHeight()) + "px");
                         } else {
                             dropdown.css('top', (dropDownTopInBottom) + "px");
                         }
@@ -42,7 +42,7 @@
                             var dropDownTopInTop = button.offset().top -  $window.pageYOffset;
 
                             if ($(window).height() < (dropDownTopInBottom + dropdown.height())) {
-                                dropdown.css('top', (dropDownTopInTop - dropdown.outerHeight()) + "px");
+                                dropdown.css('top', (dropDownTopInTop - dropdown.height() - button.outerHeight()) + "px");
                             } else {
                                 dropdown.css('top', (dropDownTopInBottom) + "px");
                             }
