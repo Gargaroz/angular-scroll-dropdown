@@ -27,7 +27,10 @@
                         } else {
                             dropdown.css('top', (dropDownTopInBottom) + "px");
                         }
-                        dropdown.css('left', button.offset().left + "px");
+                        var dropdownLeftOffset = dropdown.hasClass('dropdown-menu-scoll-right') 
+                            ? button.offset().left - (dropdown.outerWidth() - button.outerWidth())
+                            : button.offset().left;
+                        dropdown.css('left', dropdownLeftOffset + "px");
                     });
 
                     // parent is scrolling => updates the position  of the active dropdown (if there is one)
@@ -43,7 +46,10 @@
                             } else {
                                 dropdown.css('top', (dropDownTopInBottom) + "px");
                             }
-                            dropdown.css('left', button.offset().left + "px");
+                            var dropdownLeftOffset = dropdown.hasClass('dropdown-menu-scoll-right') 
+                                ? button.offset().left - (dropdown.outerWidth() - button.outerWidth())
+                                : button.offset().left;
+                            dropdown.css('left', dropdownLeftOffset + "px");
 
                             if (dropDownTopInTop < scroll.top || dropDownTopInBottom > scroll.bottom) {
                                 button.click();
