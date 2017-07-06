@@ -1,0 +1,8 @@
+{
+  "name": "angular-scroll-dropdown",
+  "description": "Directive which allows using bootstrap-ui dropdown in an overflow:auto or overflow:scroll container.",
+  "version": "0.0.1",
+  "devDependencies": {
+    "angular-ui-bootstrap": "~2.5.0",
+  }
+}
