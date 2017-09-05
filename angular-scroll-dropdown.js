@@ -18,14 +18,14 @@
 
                     // change dropdown position if click on button
                     button.bind('click', function() {
-                        var dropdown = elm.find('.dropdown-menu-scoll');
+                        var dropdown = elm.find('body .dropdown-menu-scoll:visible');
                         var dropDownTopInBottom = button.offset().top + button.outerHeight() -  $window.pageYOffset;
                         var dropDownTopInTop = button.offset().top -  $window.pageYOffset;
 
-                        if ($(window).height() < (dropDownTopInBottom + dropdown.height())) {
-                            dropdown.css('top', (dropDownTopInTop - dropdown.height() - button.outerHeight()) + "px");
+                        if (dropdown.height() > dropDownTopInTop) {
+                            dropdown.css('top', Math.floor(dropdown.height() - dropDownTopInTop - button.outerHeight(true)) + "px");
                         } else {
-                            dropdown.css('top', (dropDownTopInBottom) + "px");
+                            dropdown.css('top', Math.floor(dropDownTopInTop - dropdown.height() - button.outerHeight(true)) + "px");
                         }
                         var dropdownLeftOffset = dropdown.hasClass('dropdown-menu-scoll-right') 
                             ? button.offset().left - (dropdown.outerWidth() - button.outerWidth())
@@ -35,25 +35,11 @@
 
                     // parent is scrolling => updates the position  of the active dropdown (if there is one)
                     scope.$on('contentScroll:scrolling', function (event, scroll) {
-                        var dropdown = elm.find('.dropdown-menu-scoll:visible');
+                        if (event.defaultPrevented) return;
+                        var dropdown = angular.element($.find('.dropdown-menu-scoll:visible'));
                         if (dropdown.length !== 0) {
-
-                            var dropDownTopInBottom = button.offset().top + button.outerHeight() -  $window.pageYOffset;
-                            var dropDownTopInTop = button.offset().top -  $window.pageYOffset;
-
-                            if ($(window).height() < (dropDownTopInBottom + dropdown.height())) {
-                                dropdown.css('top', (dropDownTopInTop - dropdown.height() - button.outerHeight()) + "px");
-                            } else {
-                                dropdown.css('top', (dropDownTopInBottom) + "px");
-                            }
-                            var dropdownLeftOffset = dropdown.hasClass('dropdown-menu-scoll-right') 
-                                ? button.offset().left - (dropdown.outerWidth() - button.outerWidth())
-                                : button.offset().left;
-                            dropdown.css('left', dropdownLeftOffset + "px");
-
-                            if (dropDownTopInTop < scroll.top || dropDownTopInBottom > scroll.bottom) {
-                                button.click();
-                            }
+                            button.click();
+                            event.preventDefault();
                         }
                     });
                 },
