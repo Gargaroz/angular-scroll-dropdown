@@ -18,9 +18,9 @@
 
                     // change dropdown position if click on button
                     button.bind('click', function() {
-                        var dropdown = elm.find('body .dropdown-menu-scoll:visible');
-                        var dropDownTopInBottom = button.offset().top + button.outerHeight() -  $window.pageYOffset;
-                        var dropDownTopInTop = button.offset().top -  $window.pageYOffset;
+                        var dropdown = angular.element($.find('body .dropdown-menu-scoll:visible'));
+                        var dropDownTopInBottom = button.offset().top + button.outerHeight() - $window.pageYOffset;
+                        var dropDownTopInTop = button.offset().top - $window.pageYOffset;
 
                         if (dropdown.height() > dropDownTopInTop) {
                             dropdown.css('top', Math.floor(dropdown.height() - dropDownTopInTop - button.outerHeight(true)) + "px");
